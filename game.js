@@ -1,64 +1,75 @@
-// Base de datos de países con sus banderas
-const countries = [
-    { name: 'Argentina', flag: 'https://flagcdn.com/w320/ar.png' },
-    { name: 'Brasil', flag: 'https://flagcdn.com/w320/br.png' },
-    { name: 'Chile', flag: 'https://flagcdn.com/w320/cl.png' },
-    { name: 'México', flag: 'https://flagcdn.com/w320/mx.png' },
-    { name: 'España', flag: 'https://flagcdn.com/w320/es.png' },
-    { name: 'Francia', flag: 'https://flagcdn.com/w320/fr.png' },
-    { name: 'Italia', flag: 'https://flagcdn.com/w320/it.png' },
-    { name: 'Alemania', flag: 'https://flagcdn.com/w320/de.png' },
-    { name: 'Reino Unido', flag: 'https://flagcdn.com/w320/gb.png' },
-    { name: 'Estados Unidos', flag: 'https://flagcdn.com/w320/us.png' },
-    { name: 'Canadá', flag: 'https://flagcdn.com/w320/ca.png' },
-    { name: 'Japón', flag: 'https://flagcdn.com/w320/jp.png' },
-    { name: 'China', flag: 'https://flagcdn.com/w320/cn.png' },
-    { name: 'Corea del Sur', flag: 'https://flagcdn.com/w320/kr.png' },
-    { name: 'Australia', flag: 'https://flagcdn.com/w320/au.png' },
-    { name: 'Nueva Zelanda', flag: 'https://flagcdn.com/w320/nz.png' },
-    { name: 'India', flag: 'https://flagcdn.com/w320/in.png' },
-    { name: 'Rusia', flag: 'https://flagcdn.com/w320/ru.png' },
-    { name: 'Sudáfrica', flag: 'https://flagcdn.com/w320/za.png' },
-    { name: 'Egipto', flag: 'https://flagcdn.com/w320/eg.png' },
-    { name: 'Colombia', flag: 'https://flagcdn.com/w320/co.png' },
-    { name: 'Perú', flag: 'https://flagcdn.com/w320/pe.png' },
-    { name: 'Uruguay', flag: 'https://flagcdn.com/w320/uy.png' },
-    { name: 'Venezuela', flag: 'https://flagcdn.com/w320/ve.png' },
-    { name: 'Portugal', flag: 'https://flagcdn.com/w320/pt.png' },
-    { name: 'Grecia', flag: 'https://flagcdn.com/w320/gr.png' },
-    { name: 'Países Bajos', flag: 'https://flagcdn.com/w320/nl.png' },
-    { name: 'Bélgica', flag: 'https://flagcdn.com/w320/be.png' },
-    { name: 'Suiza', flag: 'https://flagcdn.com/w320/ch.png' },
-    { name: 'Suecia', flag: 'https://flagcdn.com/w320/se.png' },
-    { name: 'Noruega', flag: 'https://flagcdn.com/w320/no.png' },
-    { name: 'Dinamarca', flag: 'https://flagcdn.com/w320/dk.png' },
-    { name: 'Finlandia', flag: 'https://flagcdn.com/w320/fi.png' },
-    { name: 'Polonia', flag: 'https://flagcdn.com/w320/pl.png' },
-    { name: 'Turquía', flag: 'https://flagcdn.com/w320/tr.png' },
-    { name: 'Irlanda', flag: 'https://flagcdn.com/w320/ie.png' },
-    { name: 'Islandia', flag: 'https://flagcdn.com/w320/is.png' },
-    { name: 'Cuba', flag: 'https://flagcdn.com/w320/cu.png' },
-    { name: 'Jamaica', flag: 'https://flagcdn.com/w320/jm.png' },
-    { name: 'Tailandia', flag: 'https://flagcdn.com/w320/th.png' },
-    { name: 'Vietnam', flag: 'https://flagcdn.com/w320/vn.png' },
-    { name: 'Singapur', flag: 'https://flagcdn.com/w320/sg.png' },
-    { name: 'Malasia', flag: 'https://flagcdn.com/w320/my.png' },
-    { name: 'Filipinas', flag: 'https://flagcdn.com/w320/ph.png' },
-    { name: 'Indonesia', flag: 'https://flagcdn.com/w320/id.png' },
-    { name: 'Arabia Saudita', flag: 'https://flagcdn.com/w320/sa.png' },
-    { name: 'Emiratos Árabes Unidos', flag: 'https://flagcdn.com/w320/ae.png' },
-    { name: 'Israel', flag: 'https://flagcdn.com/w320/il.png' },
-    { name: 'Marruecos', flag: 'https://flagcdn.com/w320/ma.png' },
-    { name: 'Kenia', flag: 'https://flagcdn.com/w320/ke.png' }
+// Base de datos de personas famosas con sus fotos
+const celebrities = [
+    // Actores y Actrices
+    { name: 'Leonardo DiCaprio', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Leonardo_Dicaprio_Cannes_2019.jpg/400px-Leonardo_Dicaprio_Cannes_2019.jpg', category: 'Actor' },
+    { name: 'Scarlett Johansson', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Scarlett_Johansson_by_Gage_Skidmore_2_%28cropped%2C_2%29.jpg/400px-Scarlett_Johansson_by_Gage_Skidmore_2_%28cropped%2C_2%29.jpg', category: 'Actriz' },
+    { name: 'Tom Cruise', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Tom_Cruise_by_Gage_Skidmore_2.jpg/400px-Tom_Cruise_by_Gage_Skidmore_2.jpg', category: 'Actor' },
+    { name: 'Emma Watson', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Emma_Watson_2013.jpg/400px-Emma_Watson_2013.jpg', category: 'Actriz' },
+    { name: 'Will Smith', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/TechCrunch_Disrupt_2019_%2848834434641%29_%28cropped%29.jpg/400px-TechCrunch_Disrupt_2019_%2848834434641%29_%28cropped%29.jpg', category: 'Actor' },
+    { name: 'Angelina Jolie', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Angelina_Jolie_2_June_2014_%28cropped%29.jpg/400px-Angelina_Jolie_2_June_2014_%28cropped%29.jpg', category: 'Actriz' },
+    { name: 'Robert Downey Jr.', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Robert_Downey_Jr_2014_Comic_Con_%28cropped%29.jpg/400px-Robert_Downey_Jr_2014_Comic_Con_%28cropped%29.jpg', category: 'Actor' },
+    { name: 'Jennifer Lawrence', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Jennifer_Lawrence_SDCC_2015_X-Men.jpg/400px-Jennifer_Lawrence_SDCC_2015_X-Men.jpg', category: 'Actriz' },
+    { name: 'Dwayne Johnson', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Dwayne_Johnson_2%2C_2013.jpg/400px-Dwayne_Johnson_2%2C_2013.jpg', category: 'Actor' },
+    { name: 'Margot Robbie', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Margot_Robbie_%2848475777346%29_%28cropped%29.jpg/400px-Margot_Robbie_%2848475777346%29_%28cropped%29.jpg', category: 'Actriz' },
+
+    // Músicos
+    { name: 'Taylor Swift', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/191125_Taylor_Swift_at_the_2019_American_Music_Awards_%28cropped%29.png/400px-191125_Taylor_Swift_at_the_2019_American_Music_Awards_%28cropped%29.png', category: 'Cantante' },
+    { name: 'Ed Sheeran', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Ed_Sheeran-6886_%28cropped%29.jpg/400px-Ed_Sheeran-6886_%28cropped%29.jpg', category: 'Cantante' },
+    { name: 'Beyoncé', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Beyonce_-_The_Formation_World_Tour%2C_at_Wembley_Stadium_in_London%2C_England.jpg/400px-Beyonce_-_The_Formation_World_Tour%2C_at_Wembley_Stadium_in_London%2C_England.jpg', category: 'Cantante' },
+    { name: 'Bruno Mars', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Bruno_Mars_2011_%28Cropped%29.jpg/400px-Bruno_Mars_2011_%28Cropped%29.jpg', category: 'Cantante' },
+    { name: 'Ariana Grande', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Ariana_Grande_Grammys_Red_Carpet_2020.png/400px-Ariana_Grande_Grammys_Red_Carpet_2020.png', category: 'Cantante' },
+    { name: 'Eminem', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Eminem_-_Concert_for_Valor_in_Washington_DC_Nov._11%2C_2014_%282%29_%28Cropped%29.jpg/400px-Eminem_-_Concert_for_Valor_in_Washington_DC_Nov._11%2C_2014_%282%29_%28Cropped%29.jpg', category: 'Rapero' },
+    { name: 'Rihanna', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Rihanna_Fenty_2018.png/400px-Rihanna_Fenty_2018.png', category: 'Cantante' },
+    { name: 'Justin Bieber', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Justin_Bieber_in_2015.jpg/400px-Justin_Bieber_in_2015.jpg', category: 'Cantante' },
+    { name: 'Lady Gaga', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Lady_Gaga_at_Joe_Biden%27s_inauguration_%28cropped_3%29.jpg/400px-Lady_Gaga_at_Joe_Biden%27s_inauguration_%28cropped_3%29.jpg', category: 'Cantante' },
+    { name: 'Shakira', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Shakira_2020_%28cropped%29.png/400px-Shakira_2020_%28cropped%29.png', category: 'Cantante' },
+
+    // Deportistas
+    { name: 'Lionel Messi', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.jpg/400px-Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.jpg', category: 'Futbolista' },
+    { name: 'Cristiano Ronaldo', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Cristiano_Ronaldo_playing_for_Al_Nassr_FC_against_Persepolis%2C_September_2023_%28cropped%29.jpg/400px-Cristiano_Ronaldo_playing_for_Al_Nassr_FC_against_Persepolis%2C_September_2023_%28cropped%29.jpg', category: 'Futbolista' },
+    { name: 'Serena Williams', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Serena_Williams_at_2013_US_Open.jpg/400px-Serena_Williams_at_2013_US_Open.jpg', category: 'Tenista' },
+    { name: 'LeBron James', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/LeBron_James_%2851959977144%29_%28cropped2%29.jpg/400px-LeBron_James_%2851959977144%29_%28cropped2%29.jpg', category: 'Basquetbolista' },
+    { name: 'Neymar Jr', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Neymar_Jr._with_Al_Hilal%2C_3_October_2023_-_03_%28cropped%29.jpg/400px-Neymar_Jr._with_Al_Hilal%2C_3_October_2023_-_03_%28cropped%29.jpg', category: 'Futbolista' },
+    { name: 'Rafael Nadal', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Rafael_Nadal_10%2C_Aegon_Championships%2C_London%2C_UK_-_Diliff.jpg/400px-Rafael_Nadal_10%2C_Aegon_Championships%2C_London%2C_UK_-_Diliff.jpg', category: 'Tenista' },
+    { name: 'Usain Bolt', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Usain_Bolt_smiling_Berlin_2009.JPG/400px-Usain_Bolt_smiling_Berlin_2009.JPG', category: 'Atleta' },
+    { name: 'Michael Phelps', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Michael_Phelps_Rio_Olympics_2016.jpg/400px-Michael_Phelps_Rio_Olympics_2016.jpg', category: 'Nadador' },
+    { name: 'Simone Biles', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Simone_Biles_Rio_2016d.jpg/400px-Simone_Biles_Rio_2016d.jpg', category: 'Gimnasta' },
+    { name: 'Kylian Mbappé', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/2019147193923_2019-05-27_Fussball_1.FC_Kaiserslautern_vs._FC_Bayern_M%C3%BCnchen_-_Sven_-_1D_X_MK_II_-_2342_-_B70I0524_%28cropped%29.jpg/400px-thumbnail.jpg', category: 'Futbolista' },
+
+    // Innovadores y Empresarios
+    { name: 'Elon Musk', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Elon_Musk_Royal_Society_%28crop2%29.jpg/400px-Elon_Musk_Royal_Society_%28crop2%29.jpg', category: 'Empresario' },
+    { name: 'Bill Gates', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Bill_Gates_2018.jpg/400px-Bill_Gates_2018.jpg', category: 'Empresario' },
+    { name: 'Mark Zuckerberg', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Mark_Zuckerberg_F8_2019_Keynote_%2832830578717%29_%28cropped%29.jpg/400px-Mark_Zuckerberg_F8_2019_Keynote_%2832830578717%29_%28cropped%29.jpg', category: 'Empresario' },
+    { name: 'Jeff Bezos', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Jeff_Bezos_visits_LAAFB_SMC_%283908618%29_%28cropped%29.jpeg/400px-Jeff_Bezos_visits_LAAFB_SMC_%283908618%29_%28cropped%29.jpeg', category: 'Empresario' },
+    { name: 'Steve Jobs', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Steve_Jobs_Headshot_2010-CROP2.jpg/400px-Steve_Jobs_Headshot_2010-CROP2.jpg', category: 'Empresario' },
+
+    // Personalidades Históricas y Líderes
+    { name: 'Barack Obama', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/President_Barack_Obama.jpg/400px-President_Barack_Obama.jpg', category: 'Político' },
+    { name: 'Nelson Mandela', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Nelson_Mandela-2008_%28cropped%29.jpg/400px-Nelson_Mandela-2008_%28cropped%29.jpg', category: 'Líder' },
+    { name: 'Malala Yousafzai', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Malala_Yousafzai_2015.jpg/400px-Malala_Yousafzai_2015.jpg', category: 'Activista' },
+    { name: 'Albert Einstein', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Albert_Einstein_Head.jpg/400px-Albert_Einstein_Head.jpg', category: 'Científico' },
+    { name: 'Stephen Hawking', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Stephen_Hawking.StarChild.jpg/400px-Stephen_Hawking.StarChild.jpg', category: 'Científico' },
+
+    // Más Personalidades
+    { name: 'Oprah Winfrey', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Oprah_Winfrey_2023_Colour_of_Change.png/400px-Oprah_Winfrey_2023_Colour_of_Change.png', category: 'Presentadora' },
+    { name: 'Ellen DeGeneres', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Ellen_DeGeneres-2009.jpg/400px-Ellen_DeGeneres-2009.jpg', category: 'Comediante' },
+    { name: 'Gordon Ramsay', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Gordon_Ramsay.jpg/400px-Gordon_Ramsay.jpg', category: 'Chef' },
+    { name: 'J.K. Rowling', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/J._K._Rowling_2010.jpg/400px-J._K._Rowling_2010.jpg', category: 'Escritora' },
+    { name: 'Pablo Picasso', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/400px-Pablo_picasso_1.jpg', category: 'Artista' },
+    { name: 'David Beckham', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/David_Beckham_UNICEF_%28cropped%29.jpg/400px-David_Beckham_UNICEF_%28cropped%29.jpg', category: 'Futbolista' },
+    { name: 'Greta Thunberg', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Greta_Thunberg_au_parlement_europ%C3%A9en_%2833744056508%29%2C_recadr%C3%A9e.png/400px-Greta_Thunberg_au_parlement_europ%C3%A9en_%2833744056508%29%2C_recadr%C3%A9e.png', category: 'Activista' },
+    { name: 'Keanu Reeves', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Reuni%C3%A3o_com_o_ator_norte-americano_Keanu_Reeves_%2846806576944%29_%28cropped%29.jpg/400px-Reuni%C3%A3o_com_o_ator_norte-americano_Keanu_Reeves_%2846806576944%29_%28cropped%29.jpg', category: 'Actor' },
+    { name: 'Kobe Bryant', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Kobe_Bryant_8.jpg/400px-Kobe_Bryant_8.jpg', category: 'Basquetbolista' },
+    { name: 'Diego Maradona', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Maradona-Mundial_86_con_la_copa.jpg/400px-Maradona-Mundial_86_con_la_copa.jpg', category: 'Futbolista' }
 ];
 
 // Estado del juego principal
-let currentCountry = null;
+let currentCelebrity = null;
 let options = [];
 let score = 0;
 let streak = 0;
 let correctAnswers = 0;
-let usedCountries = [];
+let usedCelebrities = [];
 let lives = 3;
 let hasUsedSecondChance = false;
 
@@ -92,10 +103,10 @@ const minigameCells = document.querySelectorAll('.minigame-cell');
 const diamondsCaughtElement = document.getElementById('diamonds-caught');
 const minigameTimeElement = document.getElementById('minigame-time');
 
-// Función para obtener países aleatorios
-function getRandomCountries(count, exclude = []) {
-    const availableCountries = countries.filter(c => !exclude.includes(c));
-    const shuffled = [...availableCountries].sort(() => Math.random() - 0.5);
+// Función para obtener celebridades aleatorias
+function getRandomCelebrities(count, exclude = []) {
+    const availableCelebrities = celebrities.filter(c => !exclude.includes(c));
+    const shuffled = [...availableCelebrities].sort(() => Math.random() - 0.5);
     return shuffled.slice(0, count);
 }
 
@@ -113,23 +124,23 @@ function updateLives() {
 
 // Función para cargar una nueva pregunta
 function loadNewQuestion() {
-    // Reiniciar si ya se usaron todos los países
-    if (usedCountries.length >= countries.length) {
-        usedCountries = [];
+    // Reiniciar si ya se usaron todas las celebridades
+    if (usedCelebrities.length >= celebrities.length) {
+        usedCelebrities = [];
     }
 
-    // Seleccionar un país que no se haya usado
-    const availableCountries = countries.filter(c => !usedCountries.includes(c.name));
-    currentCountry = availableCountries[Math.floor(Math.random() * availableCountries.length)];
-    usedCountries.push(currentCountry.name);
+    // Seleccionar una celebridad que no se haya usado
+    const availableCelebrities = celebrities.filter(c => !usedCelebrities.includes(c.name));
+    currentCelebrity = availableCelebrities[Math.floor(Math.random() * availableCelebrities.length)];
+    usedCelebrities.push(currentCelebrity.name);
 
-    // Cargar la bandera
-    flagImage.src = currentCountry.flag;
-    flagImage.alt = 'Bandera misteriosa';
+    // Cargar la imagen
+    flagImage.src = currentCelebrity.image;
+    flagImage.alt = 'Persona misteriosa';
 
     // Generar opciones (3 incorrectas + 1 correcta)
-    const wrongOptions = getRandomCountries(3, [currentCountry]);
-    options = [...wrongOptions, currentCountry].sort(() => Math.random() - 0.5);
+    const wrongOptions = getRandomCelebrities(3, [currentCelebrity]);
+    options = [...wrongOptions, currentCelebrity].sort(() => Math.random() - 0.5);
 
     // Actualizar botones
     optionButtons.forEach((btn, index) => {
@@ -146,8 +157,8 @@ function loadNewQuestion() {
 }
 
 // Función para verificar la respuesta
-function checkAnswer(selectedCountry, button) {
-    const isCorrect = selectedCountry.name === currentCountry.name;
+function checkAnswer(selectedCelebrity, button) {
+    const isCorrect = selectedCelebrity.name === currentCelebrity.name;
 
     // Deshabilitar todos los botones
     optionButtons.forEach(btn => btn.disabled = true);
@@ -187,12 +198,12 @@ function checkAnswer(selectedCountry, button) {
         document.body.classList.add('flash-incorrect');
         setTimeout(() => document.body.classList.remove('flash-incorrect'), 500);
 
-        feedbackElement.textContent = 'INCORRECTO. Era: ' + currentCountry.name + ' | -1 VIDA';
+        feedbackElement.textContent = 'INCORRECTO. Era: ' + currentCelebrity.name + ' | -1 VIDA';
         feedbackElement.className = 'feedback incorrect';
 
         // Mostrar la opción correcta
         optionButtons.forEach((btn, index) => {
-            if (options[index].name === currentCountry.name) {
+            if (options[index].name === currentCelebrity.name) {
                 btn.classList.add('correct');
             }
         });
@@ -250,7 +261,7 @@ function restartGame() {
     streak = 0;
     correctAnswers = 0;
     lives = 3;
-    usedCountries = [];
+    usedCelebrities = [];
     hasUsedSecondChance = false;
     gameOverScreen.style.display = 'none';
     updateStats();
