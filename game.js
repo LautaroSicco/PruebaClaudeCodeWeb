@@ -101,8 +101,14 @@ function getRandomCountries(count, exclude = []) {
 
 // Función para actualizar las vidas visuales
 function updateLives() {
-    const hearts = '❤'.repeat(lives) + '🖤'.repeat(3 - lives);
+    const hearts = '❤'.repeat(Math.max(0, lives)) + '🖤'.repeat(Math.max(0, 3 - lives));
     livesElement.textContent = hearts;
+
+    // Animación de pérdida de vida
+    livesElement.classList.add('life-lost');
+    setTimeout(() => {
+        livesElement.classList.remove('life-lost');
+    }, 600);
 }
 
 // Función para cargar una nueva pregunta
@@ -154,13 +160,32 @@ function checkAnswer(selectedCountry, button) {
         correctAnswers++;
         feedbackElement.textContent = '¡CORRECTO! +' + (100 + ((streak - 1) * 10)) + ' puntos';
         feedbackElement.className = 'feedback correct';
+
+        // Efecto visual de acierto
+        document.body.classList.add('flash-correct');
+        setTimeout(() => document.body.classList.remove('flash-correct'), 500);
+
         playSound('correct');
+
+        // Actualizar estadísticas
+        updateStats();
+
+        // Avanzar automáticamente después de 1.5 segundos
+        setTimeout(() => {
+            loadNewQuestion();
+        }, 1500);
+
     } else {
         // Respuesta incorrecta - PERDER VIDA
         button.classList.add('incorrect');
         streak = 0;
         lives--;
-        updateLives();
+
+        console.log('Vida perdida. Vidas restantes:', lives); // Debug
+
+        // Efecto visual de error
+        document.body.classList.add('flash-incorrect');
+        setTimeout(() => document.body.classList.remove('flash-incorrect'), 500);
 
         feedbackElement.textContent = 'INCORRECTO. Era: ' + currentCountry.name + ' | -1 VIDA';
         feedbackElement.className = 'feedback incorrect';
@@ -173,6 +198,9 @@ function checkAnswer(selectedCountry, button) {
         });
         playSound('incorrect');
 
+        // Actualizar estadísticas ANTES de verificar game over
+        updateStats();
+
         // Verificar si se acabaron las vidas
         if (lives <= 0) {
             // Ofrecer segunda oportunidad solo la primera vez
@@ -180,23 +208,20 @@ function checkAnswer(selectedCountry, button) {
                 hasUsedSecondChance = true;
                 setTimeout(() => {
                     startMinigame();
-                }, 1500);
+                }, 2000);
                 return; // No mostrar el botón siguiente
             } else {
                 // Game Over definitivo
                 setTimeout(() => {
                     showGameOver();
-                }, 1500);
+                }, 2000);
                 return; // No mostrar el botón siguiente
             }
         }
+
+        // Mostrar botón siguiente solo si aún tiene vidas
+        nextBtn.style.display = 'block';
     }
-
-    // Actualizar estadísticas
-    updateStats();
-
-    // Mostrar botón siguiente
-    nextBtn.style.display = 'block';
 }
 
 // Función para actualizar las estadísticas
