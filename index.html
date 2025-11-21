@@ -7,10 +7,45 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Game Over Screen -->
+    <div class="overlay" id="game-over-screen" style="display: none;">
+        <div class="modal">
+            <h2 class="modal-title">GAME OVER</h2>
+            <div class="modal-content">
+                <p class="game-over-text">¡Se acabaron tus vidas!</p>
+                <p class="final-stats">Puntaje Final: <span id="final-score">0</span></p>
+                <p class="final-stats">Respuestas Correctas: <span id="final-correct">0</span></p>
+                <button class="control-btn" id="restart-game-over">JUGAR DE NUEVO</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mini Game Screen -->
+    <div class="overlay" id="minigame-screen" style="display: none;">
+        <div class="modal minigame-modal">
+            <h2 class="modal-title">¡SEGUNDA OPORTUNIDAD!</h2>
+            <div class="modal-content">
+                <p class="minigame-text">¡Atrapa 3 diamantes para recuperar una vida!</p>
+                <p class="minigame-score">Diamantes: <span id="diamonds-caught">0</span>/3</p>
+                <div class="minigame-grid">
+                    <button class="minigame-cell" data-cell="0"></button>
+                    <button class="minigame-cell" data-cell="1"></button>
+                    <button class="minigame-cell" data-cell="2"></button>
+                    <button class="minigame-cell" data-cell="3"></button>
+                </div>
+                <div class="minigame-timer">Tiempo: <span id="minigame-time">30</span>s</div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="game-header">
             <h1 class="minecraft-title">ADIVINA LA BANDERA</h1>
             <div class="stats-bar">
+                <div class="stat-box">
+                    <span class="stat-label">VIDAS</span>
+                    <span class="stat-value hearts" id="lives">❤❤❤</span>
+                </div>
                 <div class="stat-box">
                     <span class="stat-label">PUNTAJE</span>
                     <span class="stat-value" id="score">0</span>

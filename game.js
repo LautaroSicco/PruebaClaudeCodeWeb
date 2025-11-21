@@ -52,29 +52,57 @@ const countries = [
     { name: 'Kenia', flag: 'https://flagcdn.com/w320/ke.png' }
 ];
 
-// Estado del juego
+// Estado del juego principal
 let currentCountry = null;
 let options = [];
 let score = 0;
 let streak = 0;
 let correctAnswers = 0;
 let usedCountries = [];
+let lives = 3;
+let hasUsedSecondChance = false;
 
-// Elementos del DOM
+// Estado del minijuego
+let minigameTimer = null;
+let minigameTimeLeft = 30;
+let diamondsCaught = 0;
+let currentDiamondCell = null;
+let minigameInterval = null;
+
+// Elementos del DOM - Juego Principal
 const flagImage = document.getElementById('flag-image');
 const optionButtons = document.querySelectorAll('.option-btn');
 const scoreElement = document.getElementById('score');
 const streakElement = document.getElementById('streak');
 const correctElement = document.getElementById('correct');
+const livesElement = document.getElementById('lives');
 const feedbackElement = document.getElementById('feedback');
 const nextBtn = document.getElementById('next-btn');
 const restartBtn = document.getElementById('restart-btn');
+
+// Elementos del DOM - Pantallas
+const gameOverScreen = document.getElementById('game-over-screen');
+const minigameScreen = document.getElementById('minigame-screen');
+const restartGameOverBtn = document.getElementById('restart-game-over');
+const finalScoreElement = document.getElementById('final-score');
+const finalCorrectElement = document.getElementById('final-correct');
+
+// Elementos del DOM - Minijuego
+const minigameCells = document.querySelectorAll('.minigame-cell');
+const diamondsCaughtElement = document.getElementById('diamonds-caught');
+const minigameTimeElement = document.getElementById('minigame-time');
 
 // Función para obtener países aleatorios
 function getRandomCountries(count, exclude = []) {
     const availableCountries = countries.filter(c => !exclude.includes(c));
     const shuffled = [...availableCountries].sort(() => Math.random() - 0.5);
     return shuffled.slice(0, count);
+}
+
+// Función para actualizar las vidas visuales
+function updateLives() {
+    const hearts = '❤'.repeat(lives) + '🖤'.repeat(3 - lives);
+    livesElement.textContent = hearts;
 }
 
 // Función para cargar una nueva pregunta
@@ -128,10 +156,13 @@ function checkAnswer(selectedCountry, button) {
         feedbackElement.className = 'feedback correct';
         playSound('correct');
     } else {
-        // Respuesta incorrecta
+        // Respuesta incorrecta - PERDER VIDA
         button.classList.add('incorrect');
         streak = 0;
-        feedbackElement.textContent = 'INCORRECTO. Era: ' + currentCountry.name;
+        lives--;
+        updateLives();
+
+        feedbackElement.textContent = 'INCORRECTO. Era: ' + currentCountry.name + ' | -1 VIDA';
         feedbackElement.className = 'feedback incorrect';
 
         // Mostrar la opción correcta
@@ -141,6 +172,24 @@ function checkAnswer(selectedCountry, button) {
             }
         });
         playSound('incorrect');
+
+        // Verificar si se acabaron las vidas
+        if (lives <= 0) {
+            // Ofrecer segunda oportunidad solo la primera vez
+            if (!hasUsedSecondChance) {
+                hasUsedSecondChance = true;
+                setTimeout(() => {
+                    startMinigame();
+                }, 1500);
+                return; // No mostrar el botón siguiente
+            } else {
+                // Game Over definitivo
+                setTimeout(() => {
+                    showGameOver();
+                }, 1500);
+                return; // No mostrar el botón siguiente
+            }
+        }
     }
 
     // Actualizar estadísticas
@@ -155,11 +204,18 @@ function updateStats() {
     scoreElement.textContent = score;
     streakElement.textContent = streak;
     correctElement.textContent = correctAnswers;
+    updateLives();
+}
+
+// Función para mostrar Game Over
+function showGameOver() {
+    finalScoreElement.textContent = score;
+    finalCorrectElement.textContent = correctAnswers;
+    gameOverScreen.style.display = 'flex';
 }
 
 // Función para sonidos (simulado con console.log ya que no hay archivos de audio)
 function playSound(type) {
-    // En una implementación completa, aquí se reproducirían sonidos de Minecraft
     console.log(`Sound: ${type}`);
 }
 
@@ -168,14 +224,128 @@ function restartGame() {
     score = 0;
     streak = 0;
     correctAnswers = 0;
+    lives = 3;
     usedCountries = [];
+    hasUsedSecondChance = false;
+    gameOverScreen.style.display = 'none';
     updateStats();
     loadNewQuestion();
+}
+
+// ==================== MINIJUEGO ====================
+
+// Función para iniciar el minijuego
+function startMinigame() {
+    minigameScreen.style.display = 'flex';
+    minigameTimeLeft = 30;
+    diamondsCaught = 0;
+    currentDiamondCell = null;
+
+    updateMinigameDisplay();
+
+    // Limpiar celdas
+    minigameCells.forEach(cell => {
+        cell.textContent = '';
+        cell.classList.remove('diamond', 'hit');
+        cell.onclick = null;
+    });
+
+    // Iniciar generación de diamantes
+    spawnDiamond();
+    minigameInterval = setInterval(spawnDiamond, 1200); // Nuevo diamante cada 1.2s
+
+    // Iniciar temporizador
+    minigameTimer = setInterval(() => {
+        minigameTimeLeft--;
+        updateMinigameDisplay();
+
+        if (minigameTimeLeft <= 0) {
+            endMinigame(false); // Tiempo agotado - perdió
+        }
+    }, 1000);
+}
+
+// Función para generar un diamante en una celda aleatoria
+function spawnDiamond() {
+    // Limpiar celdas anteriores
+    minigameCells.forEach(cell => {
+        cell.textContent = '';
+        cell.classList.remove('diamond');
+        cell.onclick = null;
+    });
+
+    // Generar items aleatorios en cada celda
+    const items = ['🪨', '🪨', '🪨', '💎']; // 3 piedras, 1 diamante
+    const shuffled = items.sort(() => Math.random() - 0.5);
+
+    minigameCells.forEach((cell, index) => {
+        const item = shuffled[index];
+        cell.textContent = item;
+
+        if (item === '💎') {
+            cell.classList.add('diamond');
+            currentDiamondCell = index;
+        }
+
+        cell.onclick = () => handleMinigameClick(item, cell);
+    });
+}
+
+// Función para manejar clicks en el minijuego
+function handleMinigameClick(item, cell) {
+    if (item === '💎') {
+        // ¡Atrapó un diamante!
+        diamondsCaught++;
+        cell.classList.add('hit');
+        updateMinigameDisplay();
+
+        // Verificar si ganó
+        if (diamondsCaught >= 3) {
+            endMinigame(true); // Ganó!
+        } else {
+            // Generar nuevo diamante inmediatamente
+            setTimeout(spawnDiamond, 300);
+        }
+    } else {
+        // Click en piedra - no pasa nada (o podría restar tiempo)
+        cell.style.opacity = '0.5';
+        setTimeout(() => {
+            cell.style.opacity = '1';
+        }, 200);
+    }
+}
+
+// Función para actualizar display del minijuego
+function updateMinigameDisplay() {
+    diamondsCaughtElement.textContent = diamondsCaught;
+    minigameTimeElement.textContent = minigameTimeLeft;
+}
+
+// Función para terminar el minijuego
+function endMinigame(won) {
+    // Limpiar temporizadores
+    clearInterval(minigameTimer);
+    clearInterval(minigameInterval);
+
+    minigameScreen.style.display = 'none';
+
+    if (won) {
+        // ¡Ganó! Recupera una vida
+        lives = 1; // Le damos 1 vida para continuar
+        updateLives();
+        alert('¡FELICIDADES! Atrapaste los diamantes.\nRecuperaste una vida. ¡Sigue jugando!');
+        loadNewQuestion();
+    } else {
+        // Perdió el minijuego - Game Over definitivo
+        showGameOver();
+    }
 }
 
 // Event Listeners
 nextBtn.addEventListener('click', loadNewQuestion);
 restartBtn.addEventListener('click', restartGame);
+restartGameOverBtn.addEventListener('click', restartGame);
 
 // Iniciar el juego al cargar
+updateStats();
 loadNewQuestion();
